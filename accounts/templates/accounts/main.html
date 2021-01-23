@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Ido" content>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="{% static '/css/main.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+    <!-- Javascript Chartjs -->
+    <script src="https://www.chartjs.org/dist/2.9.4/Chart.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+
+    <!-- Cascading Dropdown for Records -->
+    <script>
+        var subjectObject = {
+          "Income": {
+            "Building or Lands": ["Rental", "Sell"],
+            "Stock Market or Crypto": ["Crypto", "Dividen", "Sell Stock"],
+            "Wage": ["Annual Bonus", "Monthly Bonus", "Monthly Wage"],
+            "Others Income": ["Other"]
+          },
+          "Expense": {
+            "Communication": ["Subscribe", "Software", "WiFi"],
+            "Entertainment": ["Charity", "Hobbies", "Sport", "Travelling", "Wellness"],
+            "Financial Expenses": ["Aids", "Child Support", "Fines", "Other Insurance", "Tax"],
+            "Food": ["Cafe", "Restaurant"],
+            "Housing": ["Building Insurance", "Housing Care", "Rent", "Utility or Energy"],
+            "Investation": ["Crypto", "House", "Land", "Stock"],
+            "Shopping": ["Accessories", "Electronics", "Kids", "Skincare", "Tools", "Vehicles"],
+            "Vehicle": ["Fuel", "Maintenance", "Parking", "Rentals", "Vehicle Insurance"],
+            "Other Expenses": ["Other"]
+          }
+        }
+        window.onload = function() {
+          var typeSel = document.getElementById("type");
+          var categorySel = document.getElementById("category");
+          var sub_categorySel = document.getElementById("sub_category");
+          for (var x in subjectObject) {
+            typeSel.options[typeSel.options.length] = new Option(x, x);
+          }
+          typeSel.onchange = function() {
+            //empty Chapters- and Topics- dropdowns
+            sub_categorySel.length = 1;
+            categorySel.length = 1;
+            //display correct values
+            for (var y in subjectObject[this.value]) {
+              categorySel.options[categorySel.options.length] = new Option(y, y);
+            }
+          }
+          categorySel.onchange = function() {
+            //empty Chapters dropdown
+            sub_categorySel.length = 1;
+            //display correct values
+            var z = subjectObject[typeSel.value][this.value];
+            for (var i = 0; i < z.length; i++) {
+              sub_categorySel.options[sub_categorySel.options.length] = new Option(z[i], z[i]);
+            }
+          }
+        }
+    </script>
+
+    <!-- Title and Icon-->
+    <link rel="icon" href="{% static '/images/wallet.png' %}" type="image/png">
+    <title>Dashboard</title>
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-custom" id="navbar">
+        <div class="container-fluid"></div>
+            <a class="navbar-brand" href="{%url 'dashboard' %}">
+                <img src="{% static '/images/wallet.png' %}" id="logo" alt="" width="30" height="24" class="d-inline-block align-top">
+                Manage your Finance | {{request.user}}
+            </a>
+            <ul class="navbar-nav px-3 flex-row-reverse">
+                <a class="nav-link" href="{%url 'logout' %}"><button>Sign out</button></a>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+                <nav id="sidenav">
+                    <ul class="nav flex-column">
+                        <li class="nav-link active" id="sidetext"><a href="{%url 'dashboard' %}"><i class="fas fa-chart-bar nav-icon"></i>Dashboard</a></li>
+                        <li class="nav-link active" id="sidetext"><a href="{%url 'records' %}"><i class="fas fa-dice-d6 nav-icon"></i>Records</a></li>
+                        <li class="nav-link active" id="sidetext"><a href="{%url 'reports' %}"><i class="fas fa-table nav-icon"></i>Reports</a></li>
+                    </ul>
+                </nav>
+                <div class="col" id="grid-right">
+                    <div class="container-fluid">
+                        <!-- Insert Records-->
+                        {% block content %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+        </div>
+    </div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        {% block jquery %}{% endblock %}
+    })
+</script>
+</body>
+</html>

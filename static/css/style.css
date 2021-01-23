@@ -1,0 +1,109 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #DEDEDE;
+    background-size: cover;
+}
+
+.box
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background: rgba(0,0,0,.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.5);
+    border-radius: 10px;
+}
+
+.box h2
+{
+    margin: 0 0 50px;
+    padding: 0;
+    color: #03a9f4;
+    text-align: center;
+}
+
+.box .inputBox
+{
+    position: relative;
+}
+
+.box .inputBox input 
+{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.box .inputBox label 
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s
+}
+
+.box .inputBox input:focus ~ label,
+.box .inputBox input:valid ~ label 
+{
+    top: -35px;
+    left: 0;
+    color: #03a9f4;
+    font-size: 15px;
+}
+
+.box input[type="submit"]
+{
+    border: 1px solid #fff;
+    border-radius: 10px;
+    background: transparent;
+    outline: none;
+    font-size: medium;
+    color: #fff;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+}
+
+.box input[type="submit"]:hover
+{
+    border: 1px solid #03a9f4;
+    border-radius: 10px;
+    background: transparent;
+    outline: none;
+    font-size: medium;
+    color: #03a9f4;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+}
+
+.regist 
+{
+    color: white;
+    margin: 25px;
+    text-align: center;
+}
+
+.login
+{
+    color: white;
+    margin: 25px;
+    text-align: center;
+}

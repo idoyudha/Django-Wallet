@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+
+body {
+    height: 100%;
+    color: white;
+}
+
+#navbar {
+    background-color: transparent;
+    margin: auto;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+}
+
+.container {
+    color: white;
+    margin-top: 150px;
+}
+
+button {
+    color: black;
+    padding: 5px 25px;
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3x ease 0s;
+}
+
+button:hover {
+    background-color: rgba(240, 240, 240, 1);
+}
+
+#log-in{
+    margin: 6px;
+}

@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login Form</title>
+        <link href="{% static '/css/style.css' %}" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="box">
+            <h2>LOG IN</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="inputBox">
+                    <input autocomple="off" type="text" name="username" required="">
+                    <label>Username</label>
+                </div>
+                <div class="inputBox">
+                    <input type="password" name="password" required="">
+                    <label>Password</label>
+                </div>
+                <input type="submit" name="" value="log_in">
+            </form>
+            <div class="regist">
+                <p>Don't have an account? <a href="{% url 'register' %}">Sign Up</a></p>
+            </div>
+        </div>
+        {% for message in messages %}
+            <p id="messages">{{ message }}</p>
+        {% endfor %}
+    </body>
+</html>

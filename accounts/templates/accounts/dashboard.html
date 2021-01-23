@@ -1,0 +1,223 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+</div>
+<!-- Content Row -->
+<div class="row">
+    <div class="col mb-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                            Cash Balance Overall
+                        </div>
+                        <div class="h5 mb-0 text-gray-800">
+                            ${{cash_balance|floatformat:2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                            Cash Balance This Month
+                        </div>
+                        <div class="h5 mb-0 text-gray-800">
+                            ${{month_cash_balance|floatformat:2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                            Total Earnings 
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            ${{total_earnings|floatformat:2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs fw-bold text-success text-uppercase mb-1">
+                            Total Expenses
+                        </div>
+                        <div class="h5 mb-0 text-gray-800">
+                            ${{total_expenses|floatformat:2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                            This Month Earnings
+                        </div>
+                        <div class="h5 mb-0 text-gray-800">
+                            ${{month_earnings|floatformat:2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs fw-bold text-success text-uppercase mb-1">
+                            This Month Expenses
+                        </div>
+                        <div class="h5 mb-0 text-gray-800">
+                            ${{month_expenses|floatformat:2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Chart -->
+<div class="row">
+    <div class="col-6">
+        <div class="card shadow mb-4">
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary" id="card-header">Monthly Earnings vs Monthly Expense</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <div style="width:100%;">
+                    <canvas id="myChart1"></canvas>
+                </div>
+	            <script>
+                    var ctx = document.getElementById('myChart1').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['{{m6}}', '{{m5}}', '{{m4}}' , '{{m3}}' , '{{m2}}' , '{{m1}}'],
+                            datasets: [{
+                                label: '# Earnings',
+                                fill: false,
+                                data: [{{ea6}}, {{ea5}}, {{ea4}}, {{ea3}}, {{ea2}}, {{ea1}}],
+                                backgroundColor: window.chartColors.blue,
+                                borderColor: window.chartColors.blue,
+                                borderWidth: 1
+                            }, {
+                                label: '# Expenses ',
+                                fill: false,
+                                data: [ {{ex6}}, {{ex5}}, {{ex4}}, {{ex3}}, {{ex2}}, {{ex1}} ],
+                                backgroundColor: window.chartColors.red,
+                                borderColor: window.chartColors.red,
+                                borderWidth: 1
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary" id="card-header">Most Spending</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <div style="width:100%;">
+                    <canvas id="myChart"></canvas>
+                </div>
+	            <script>
+                    // Get data from back-end
+                    {% block jquery %}
+                    var endpoint = '/api/barchart/data/'
+                    var labels = []
+                    var defaultdata = []
+                    $.ajax({
+                        method: 'GET',
+                        url: endpoint,
+                        success: function(data){
+                            labels = data.labels
+                            defaultdata = data.default
+                            setchart()
+                        },
+                        error: function(error_data){
+                            console.log("error")
+                            console.log(error_data)
+                        }
+                    })
+
+                    function setchart(){
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Most spending',
+                                    data: defaultdata,
+                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                    borderColor: window.chartColors.red,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        })
+                    };
+                    {% endblock %}
+                </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

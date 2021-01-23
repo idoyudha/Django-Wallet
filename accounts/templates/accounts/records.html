@@ -1,0 +1,81 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<div class="text-center">
+    <h2>Records Form</h2>
+    <p>Input your Income or Expense</p>
+</div>
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <!-- Select Type -->
+        <div class="form-group mb-3">
+            <label for="type">Type</label>
+            <select name="type" id="type" class="form-control">
+                <option value="">Select Type of Financial Records</option>
+            </select>
+        </div>
+        <!-- Select Category -->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="">Select Type of Category</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <label for="sub_category">Sub-Category</label>
+                <select name="sub_category" id="sub_category" class="form-control sub_category selectFilter">
+                    <option value="">Select Type Sub-Category</option>
+                </select>
+            </div>
+        </div>
+        <!-- Payment Type and Amount-->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="form-group">
+                    <label for="payment">Payment Type</label>
+                    <select name="payment" id="payment" class="form-control">
+                        <option value="-1">Select Type of Payment</option>
+                        <option>Bank Transfer</option>
+                        <option>Cash</option>
+                        <option>Credit Card</option>
+                        <option>Debit Card</option>
+                        <option>Mobile Payment</option>
+                        <option>Voucher</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input id="amount" name="amount" type="number" min="0" class="form-control">
+                </div>
+            </div>
+        </div>
+        <!-- Datetimepicker -->
+        <div class="row mb-3">
+            <div class="col-6">
+                <!-- Date Picker Input -->
+                <label for="date">Select Date</label>
+                <input id="date" type="date" name="date" class="form-control">
+            </div>
+            <div class="col-6">
+                <!-- Date Time Input -->
+                <label for="time">Select Time</label>
+                <input id="time" type="time" name="time" class="form-control">
+            </div>
+        </div>
+        <hr>
+        <!-- Button -->
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Add Record</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+
+<div class="text-center mb-2">
+    <h2> List Output </h2>
+</div>
+
+<p class="text-end fst-italic fw-bold">*click table header to sort or seach to filter data</p>
+
+<input class="form-control mb-2" id="input" type="text" placeholder="Search..">
+<div class="table-responsive">
+  <table id="reports" class="table table-hover table-sm">
+      <thead>
+          <tr>
+              <th class="table-dark" scope="col" onclick="sortTable(0)">Type</th>
+              <th class="table-dark" scope="col" onclick="sortTable(1)">Category</th>
+              <th class="table-dark" scope="col" onclick="sortTable(2)">Sub Category</th>
+              <th class="table-dark" scope="col" onclick="sortTable(3)">Payment</th>
+              <th class="table-dark" scope="col" onclick="sortTable(4)">Amount</th>
+              <th class="table-dark" scope="col" onclick="sortTable(5)">Date</th>
+              <th class="table-dark" scope="col" onclick="sortTable(6)">Time</th>
+              <th class="table-dark" scope="col">Delete</th>
+          </tr>
+      </thead>
+      {% for post in posts %}
+      <tbody id="table">
+          <tr>
+              <td>{{post.type}}</td>
+              <td>{{post.category}}</td>
+              <td>{{post.sub_category}}</td>
+              <td>{{post.payment}}</td>
+              <td>{{post.amount}}</td>
+              <td>{{post.date}}</td>
+              <td>{{post.time}}</td>
+              <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete' post.id %}" >Delete</a></td>
+          </tr>
+      </tbody>
+      {% endfor %}
+  </table>
+</div>
+
+<!-- Script for filtering table -->
+<script>
+    $(document).ready(function(){
+      $("#input").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+
+<!-- Script for sorting table -->
+<script>
+    function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("reports");
+      switching = true;
+      // Set the sorting direction to ascending:
+      dir = "asc";
+      /* Make a loop that will continue until no switching has been done: */
+      while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+          // Start by saying there should be no switching:
+          shouldSwitch = false;
+          /* Get the two elements you want to compare, one from current row and one from the next: */
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          /* Check if the two rows should switch place, based on the direction, asc or desc: */
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /* If a switch has been marked, make the switch and mark that a switch has been done: */
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          // Each time a switch is done, increase this count by 1:
+          switchcount ++;
+        } else {
+          /* If no switching has been done AND the direction is "asc", set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+</script>
+{% endblock %}

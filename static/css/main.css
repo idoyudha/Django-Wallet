@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Oswald&display=swap');
+
+.container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: rgba(181, 181, 181, 1);
+}
+
+.navbar-custom{
+    background-color: #1F1F1F;
+    color: #f5f5f5;
+    font-size: 17px;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.nav-icon {
+    padding-right: 10px;
+    color: #909090;
+}
+
+.nav-link {
+    display: flex;
+    height: 50px;
+}
+
+.nav-link a {
+    color: #f5f5f5;
+    font-size: 17px;
+    float: left;
+    padding: 5px 0px;
+    text-decoration: none;
+}
+
+.nav-link a:hover {
+    background-color: rgba(144, 144, 144, 0.2);
+    cursor: pointer;
+}
+
+#card-header {
+    text-align: center;
+}
+
+#grid-right {
+    padding-top: 80px;
+    margin-left: 200px;
+    overflow: hidden;
+}
+
+#sidenav {
+    font-family: 'Lato', sans-serif;
+    background-color: #1F1F1F;
+    padding-top: 85px;
+    width: 200px;
+    height: 100vh;
+    margin-left: -3px;
+    position: fixed;
+}
+
+button {
+    font-family: 'Rubik', sans-serif;
+    font-size: small;
+    color: black;
+    padding: 5px 20px;
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3x ease 0s;
+}
+
+button:hover {
+    background-color: rgba(240, 240, 240, 1);
+}
