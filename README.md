@@ -1,7 +1,7 @@
 # Django-Wallet
 Web application for managing and analyzing cash balance.
 
-# Django-Wallet
+## Django-Wallet
 Web application for managing cash balance. Analyzing income and expenses with responsive graph
 
 ## Overview
