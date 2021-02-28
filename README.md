@@ -44,11 +44,13 @@ Quit the server with CONTROL-C.
   - [Django template language](https://docs.djangoproject.com/en/3.1/ref/templates/language/)
   - [Bootstrap](https://getbootstrap.com/)
   - [Chart.js](https://www.chartjs.org/)
+  
 **Backend**
 - Language:
   - [Python](https://www.python.org/)
 - Main framework/libraries:
   - [Django Web framework](https://www.djangoproject.com/)
+  
 **Databases**
 - [SQLite](https://www.sqlite.org/index.html)
 
