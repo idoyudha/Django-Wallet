@@ -80,7 +80,8 @@ def dashboard(request):
     month = RecordModel.objects.filter(date__range=(month_first_day,next_month_first_day))
     month_earnings = month.filter(type='Income').aggregate(Sum('amount'))
     month_expenses = month.filter(type='Expense').aggregate(Sum('amount'))
-    month_cash_balance = month_earnings.get('amount__sum') - month_expenses.get('amount__sum')
+    month_cash_balance = (month_earnings.get('amount__sum') if month_earnings else 0 - month_expenses.get('amount__sum') if month_expenses else 0 )
+
     # Last 6 month
     # Last month
     m1_first1 = date_today - timedelta(days=32)
